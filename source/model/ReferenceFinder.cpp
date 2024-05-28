@@ -979,8 +979,8 @@ void RefMark::FinishConstructor()
   const double fx = p.x / ReferenceFinder::sPaper.mWidth;  // fx is between 0 and 1
   const double fy = p.y / ReferenceFinder::sPaper.mHeight; // fy is between 0 and 1
 
-  key_t nx = static_cast<key_t> (floor(0.5 + fx * ReferenceFinder::sNumX));
-  key_t ny = static_cast<key_t> (floor(0.5 + fy * ReferenceFinder::sNumY));
+  key_t nx = static_cast<key_t> (floor(0.5 + fx * (ReferenceFinder::sNumX - 1)));
+  key_t ny = static_cast<key_t> (floor(0.5 + fy * (ReferenceFinder::sNumY - 1)));
   mKey = 1 + nx * ReferenceFinder::sNumY + ny;
 }
 
@@ -1332,9 +1332,9 @@ void RefLine::FinishConstructor()
     pow(ReferenceFinder::sPaper.mHeight, 2));
   const double fd = l.d / dmax; // fd is between 0 and 1
   
-  key_t nd = static_cast <key_t> (floor(0.5 + fd * ReferenceFinder::sNumD));
+  key_t nd = static_cast <key_t> (floor(0.5 + fd * (ReferenceFinder::sNumD - 1)));
   if (nd == 0) fa = fmod(2 * fa, 1);  // for d=0, we map alpha and pi+alpha to the same key
-  key_t na = static_cast <key_t> (floor(0.5 + fa * ReferenceFinder::sNumA));
+  key_t na = static_cast <key_t> (floor(0.5 + fa * (ReferenceFinder::sNumA - 1)));
   mKey = 1 + na * ReferenceFinder::sNumD + nd;
 }
 
